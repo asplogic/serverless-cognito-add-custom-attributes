@@ -143,10 +143,14 @@ const updateUserPoolClient = async (
   if (readAttributes.length + writeAttributes.length > 0) {
     const readAttributeNames = _.map(readAttributes, (x) =>
       transformAttributeName(x.Name)
-    );
+    ).filter(function( element ) {
+       return element !== undefined;
+    });
     const writeAttributeNames = _.map(writeAttributes, (x) =>
       transformAttributeName(x.Name)
-    );
+    ).filter(function( element ) {
+       return element !== undefined;
+    });
 
     try {
       let sanitisedUserPoolClient = _.omit(userPoolClient, ['ClientSecret', 'CreationDate', 'LastModifiedDate']);
